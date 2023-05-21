@@ -111,6 +111,6 @@ function updateItem(text, i){
 }
 
 window.onload = function() {
-  displayDate()
+  displayDate();
   displayItems();
 }
