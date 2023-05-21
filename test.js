@@ -34,6 +34,7 @@ function displayItems(){
                   <button class="saveBtn">Save</button>
                   <button class="cancelBtn">Cancel</button>
                 </div>
+                <div class="date-time">${currentDate}</div>
               </div>`
   }
   document.querySelector(".to-do-list").innerHTML = items;
