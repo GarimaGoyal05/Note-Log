@@ -19,23 +19,25 @@ function displayDate(){
   document.querySelector("#date").innerHTML = date; 
 }
 
-function displayItems(){
+function displayItems() {
   let items = "";
-  for(let i = 0; i < itemsArray.length; i++){
-    items += `<div class="item">
-                <div class="input-controller">
-                  <textarea disabled>${itemsArray[i]}</textarea>
-                  <div class="edit-controller">
-                    <i class="fa-solid fa-check deleteBtn"></i>
-                    <i class="fa-solid fa-pen-to-square editBtn"></i>
-                  </div>
-                </div>
-                <div class="update-controller">
-                  <button class="saveBtn">Save</button>
-                  <button class="cancelBtn">Cancel</button>
-                </div>
-                <div class="date-time">${currentDate}</div>
-              </div>`
+  for (let i = 0; i < itemsArray.length; i++) {
+    const currentItem = itemsArray[i];
+    items += `
+      <div class="item">
+        <div class="input-controller">
+          <textarea disabled>${currentItem.text}</textarea>
+          <div class="edit-controller">
+            <i class="fa-solid fa-check deleteBtn"></i>
+            <i class="fa-solid fa-pen-to-square editBtn"></i>
+          </div>
+        </div>
+        <div class="update-controller">
+          <button class="saveBtn">Save</button>
+          <button class="cancelBtn">Cancel</button>
+        </div>
+        <div class="date-time">${currentItem.timestamp}</div>
+      </div>`;
   }
   document.querySelector(".to-do-list").innerHTML = items;
   activateDeleteListeners();
@@ -85,8 +87,13 @@ function activateCancelListeners(){
   })
 }
 
-function createItem(item){
-  itemsArray.push(item.value);
+function createItem(item) {
+  const newItem = {
+    text: item.value,
+    timestamp: new Date().toLocaleString()
+  };
+
+  itemsArray.push(newItem);
   localStorage.setItem('items', JSON.stringify(itemsArray));
   location.reload();
 }
